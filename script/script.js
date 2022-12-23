@@ -41,15 +41,73 @@ agregarMonitores();
 
 //funcion para agregar listeners a los botones
 function agregarMonitores() {
-    //TODO
+    const btnMostrar = document.getElementById('mostrarPaises');
+    btnMostrar.addEventListener("click", mostrarPaises); 
+
+    const btnAgregar = document.getElementById('agregarPais');
+    btnAgregar.addEventListener("click", agregarPais);
 }
 
 
 //funcion que mostrara las paises en la pagina
+ 
+
 function mostrarPaises() {
-  //TODO
-}
+      
+        let stringTabla = "";
+    
+        for (pais of paises) {
+        stringTabla +=
+        `<div class="col-12 col-lg-12">
+            <table class="table table-sm table-striped bg-gradient-warning">
+                <tbody>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Capital</th>
+                        <th>Idioma</th>
+                        <th>Moneda</th>
+                    </tr>
+                    <tr>
+                        <td>${pais.nombre}</td>
+                        <td>${pais.capital}</td>
+                        <td>${pais.idioma_oficial}</td>
+                        <td>${pais.moneda}</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4" class="text-center">
+                        <img src="${pais.bandera}" alt="Bandera de ${pais.nombre}">
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>`;
+    
+        document.getElementById("paises").innerHTML = stringTabla;
+        }
+    } 
 
 //funcion que permite agregar un pais al arreglo
+
 function agregarPais() {
+    let nombre = prompt("Ingrese el nombre del país:");
+    let capital = prompt("Ingrese la capital del país:");
+    let idioma = prompt("Ingrese el idioma del país:");
+    let moneda = prompt("Ingrese la moneda del país:");
+    let bandera = prompt("Ingrese la bandera del país:");
+
+    let pais = {
+        nombre: nombre,
+        bandera: bandera,
+        capital: capital,
+        idioma_oficial: idioma,
+        moneda: moneda
+    }
+
+    if((pais.nombre != "" && pais.nombre != null) && (pais.capital != null && pais.capital !="") && (pais.bandera != null && pais.bandera !="") && (pais.idioma_oficial != null && pais.idioma_oficial !="") && (pais.moneda != null && pais.moneda !=""))
+    paises.unshift(pais);
+    mostrarPaises()
+ 
 }
+
